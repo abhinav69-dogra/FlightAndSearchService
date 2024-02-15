@@ -1,6 +1,6 @@
 const {CityRepository} = require('../repository/index');
 
-class CityService{
+class CityService {
 
     constructor(){
         this.cityRepository=new CityRepository();
@@ -50,3 +50,5 @@ class CityService{
 
     }
 }
+
+module.exports = CityService;
