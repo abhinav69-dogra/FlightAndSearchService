@@ -1,4 +1,5 @@
-const {City}= require('../models/index')
+const {City}= require('../models/index');
+const { trace } = require('../routes');
 
 class CityRepository{
     async createCity({ name }) {
@@ -16,7 +17,7 @@ class CityRepository{
         }
     }
 
-    async deleteCity({ cityId }) {
+    async deleteCity(cityId) {
         try {
 
             await City.destroy({
@@ -33,12 +34,10 @@ class CityRepository{
 
     async updateCity(cityId, data) {
         try {
-            const city= await City.update(data, {
-                where: {
-                    id :cityId
-                }
-            });
-            return city;
+            const city= await City.findByPk(cityId);
+            city.name=data.name;
+            await city.save();
+            return city; 
         } catch (error) {
             console.log("something went wrong")
             throw error;
@@ -56,6 +55,17 @@ class CityRepository{
             throw error;
         }
 
+    }
+
+    async getAllCities(){
+        try {
+            const cities= await City.findAll();
+            return cities;
+        } catch (error) {
+            console.log("something went wrong")
+            throw error;
+            
+        }
     }
     
 }
