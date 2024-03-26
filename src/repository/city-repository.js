@@ -78,6 +78,20 @@ class CityRepository{
             
         }
     }
+
+    async getAllAirportsOfCity(cityName){
+        try {
+            const airports= await Airport.findAll({
+                where : {
+                    
+                }
+            })
+        } catch (error) {
+            console.log("something went wrong")
+            throw error;
+            
+        }
+    }
     
 }
 
