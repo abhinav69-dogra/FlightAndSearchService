@@ -1,5 +1,6 @@
+const booking = require('../../../BookingService/src/models/booking');
 const {Flights} = require('../models/index');
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 
 class FlightRepository{
      
@@ -65,6 +66,21 @@ class FlightRepository{
         } catch (error) {
             console.log("Something went wrong in the repository layer");
             throw {error};
+        }
+    }
+
+    async updateFlights(flightId,data){
+        try {
+            await Flights.update(data, {
+                where : {
+                    id : flightId
+                }
+            });
+            return true;
+        } catch (error) {
+            console.log("Something went wrong in repo layer");
+            throw {error};
+            
         }
     }
 }
