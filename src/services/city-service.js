@@ -1,6 +1,6 @@
 const {CityRepository} = require('../repository/index');
 
-class CityService{
+class CityService {
 
     constructor(){
         this.cityRepository=new CityRepository();
@@ -49,4 +49,17 @@ class CityService{
         }
 
     }
+
+    async getAllCities(filter){
+        try {
+            const cities= await this.cityRepository.getAllCities(filter);
+            return cities;
+        } catch (error) {
+            console.log("someething went wrong")
+            throw {error};
+            
+        }
+    }
 }
+
+module.exports = CityService;
